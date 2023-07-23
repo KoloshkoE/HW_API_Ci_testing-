@@ -3,6 +3,7 @@ package ru.netology.rest;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 class MobileBankApiTestV1 {
     @Test
@@ -16,6 +17,10 @@ class MobileBankApiTestV1 {
           .get("/demo/accounts")
       // Проверки
       .then()
-          .statusCode(200);
+          .statusCode(200)
+              .contentType("application/json; charset=UTF-8")
+              .body("[1].id",equalTo(2))
+              .body("[2].currency",equalTo("RUB"))
+              .body("[0].balance",equalTo(992821429));
     }
 }
